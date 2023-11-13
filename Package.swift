@@ -6,18 +6,22 @@ import PackageDescription
 let package = Package(
     name: "NaverMap-iOS-SPM",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "NaverMap-iOS-SPM",
             targets: ["NaverMap-iOS-SPM"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
+        .binaryTarget(
+            name: "NMapsMap",
+            path: "./Frameworks/NMapsMap.xcframework"
+        ),
+        .binaryTarget(
+            name: "NMapsGeometry",
+            path: "./Frameworks/NMapsGeometry.xcframework"
+        ),
         .target(
-            name: "NaverMap-iOS-SPM"),
-        .testTarget(
-            name: "NaverMap-iOS-SPMTests",
-            dependencies: ["NaverMap-iOS-SPM"]),
+            name: "NaverMap-iOS-SPM",
+            dependencies: ["NMapsMap", "NMapsGeometry"]
+        )
     ]
 )
